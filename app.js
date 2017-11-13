@@ -23,7 +23,7 @@ const twitelo = new Twitter({
 });
 
 let favstream = main.stream('statuses/filter', {
-    track: ['velkoz', 'ori', 'syndra', 'rakan', 'sense8']
+    track: ['velkoz', 'ori and the blind forest', 'ori and the will of the wisps', 'sense8', 'mario']
 });
 
 let favstreamTwitelo = twitelo.stream('statuses/filter', {
@@ -41,10 +41,10 @@ let rtstream = proverbe.stream('statuses/filter', {
     track: ['#proverbe', '#citation']
 });
 
-// FAVLIMIT/30 secondes
+// FAVLIMIT/40 secondes
 const FAVLIMIT = 1;
-// FAVLIMIT/5 minutes
-const FAVLIMITTWITELO = 1;
+// FAVLIMIT/10 minutes
+const FAVLIMITTWITELO = 2;
 // RTLIMIT/2 minutes
 const RTLIMIT = 1;
 
@@ -99,21 +99,21 @@ let favTwitelo = (account, tweet) => {
             account.post('favorites/create', {
                 id: tweet.id_str
             });
-        }, 20000);
+        }, 40000);
     }
 };
 
 /* Loop reset limits */
 
 setInterval(() => {
-    console.log(`(iFonny_) Nombre de tweets fav durant les 30 dernieres secondes : ${favlimit}`)
+    console.log(`(iFonny_) Nombre de tweets fav durant les 40 dernieres secondes : ${favlimit}`)
     favlimit = 0;
-}, 30000);
+}, 40000);
 
 setInterval(() => {
-    console.log(`(TwiteloFR) Nombre de tweets fav durant les 5 dernieres minutes : ${favlimitTwitelo}`)
+    console.log(`(TwiteloFR) Nombre de tweets fav durant les 10 dernieres minutes : ${favlimitTwitelo}`)
     favlimitTwitelo = 0;
-}, 300000);
+}, 600000);
 
 setInterval(() => {
     console.log(`(Mrproverbe) Nombre de tweets rt durant les 2 dernieres minutes : ${rtlimit}`)
