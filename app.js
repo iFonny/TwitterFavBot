@@ -23,7 +23,7 @@ const twitelo = new Twitter({
 });
 
 let favstream = main.stream('statuses/filter', {
-    track: ['velkoz', 'ori and the blind forest', 'ori and the will of the wisps', 'sense8', 'mario odyssey']
+    track: ['velkoz', 'ori and the blind forest', 'ori and the will of the wisps', 'sense8']
 });
 
 let favstreamTwitelo = twitelo.stream('statuses/filter', {
