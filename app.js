@@ -27,7 +27,7 @@ let favstream = main.stream('statuses/filter', {
 });
 
 let favstreamTwitelo = twitelo.stream('statuses/filter', {
-    track: ['league of legends', 'mmr', 'twitelo', 'lyon esport', 'high elo',
+    track: ['league of legends', 'mmr', 'twitelo', 'high elo',
         'Aatrox', 'Akali', 'Alistar', 'Amumu', 'Anivia', 'Blitzcrank', 'Chogath',
         'Ezreal', 'Fiddlestick', 'Galio', 'Gangplank', 'Garen', 'Gragas', 'Hecarim', 'Heimerdinger', 'Illaoi', 'Irelia',
         'Jarvan', 'Kassadin', 'KhaZix', 'Kindred', 'KogMaw', 'Lee Sin', 'Lissandra', 'Malphite', 'Malzahar', 'Maokai',
