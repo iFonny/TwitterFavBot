@@ -23,11 +23,11 @@ const twitelo = new Twitter({
 });
 
 let favstream = main.stream('statuses/filter', {
-    track: ['velkoz', 'ori and the blind forest', 'ori and the will of the wisps', 'sense8']
+    track: ['ori and the blind forest', 'ori and the will of the wisps', 'sense8']
 });
 
 let favstreamTwitelo = twitelo.stream('statuses/filter', {
-    track: ['league of legends', 'mmr', 'twitelo', 'high elo',
+    track: ['speedrun', 'speedrunning', 'league of legends', 'mmr', 'high elo',
         'Aatrox', 'Akali', 'Alistar', 'Amumu', 'Anivia', 'Blitzcrank', 'Chogath',
         'Ezreal', 'Fiddlestick', 'Galio', 'Gangplank', 'Garen', 'Gragas', 'Hecarim', 'Heimerdinger', 'Illaoi', 'Irelia',
         'Jarvan', 'Kassadin', 'KhaZix', 'Kindred', 'KogMaw', 'Lee Sin', 'Lissandra', 'Malphite', 'Malzahar', 'Maokai',
