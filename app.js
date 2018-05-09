@@ -32,7 +32,7 @@ let favstreamTwitelo = twitelo.stream('statuses/filter', {
         'Ezreal', 'Fiddlestick', 'Galio', 'Gangplank', 'Garen', 'Gragas', 'Hecarim', 'Heimerdinger', 'Illaoi', 'Irelia',
         'Jarvan', 'Kassadin', 'KhaZix', 'Kindred', 'KogMaw', 'Lee Sin', 'Lissandra', 'Malphite', 'Malzahar', 'Maokai',
         'Mordekaiser', 'Nasus', 'Nidalee', 'Rammus', 'RekSai', 'Renekton', 'Riven', 'Sejuani', 'Singed',
-        'Skarner', 'Syndra', 'Taric', 'Teemo', 'Thresh', 'Tryndamere', 'Twisted Fate','Udyr', 'Urgot', 'Varus', 'Vayne',
+        'Skarner', 'Syndra', 'Taric', 'Teemo', 'Thresh', 'Tryndamere', 'Twisted Fate', 'Udyr', 'Urgot', 'Varus', 'Vayne',
         'Veigar', 'VelKoz', 'Volibear', 'Wukong', 'Xerath', 'Yasuo', 'Ziggs', 'Zilean'
     ]
 });
@@ -62,8 +62,8 @@ favstream.on('tweet', function (tweet) {
 
 favstreamTwitelo.on('tweet', function (tweet) {
     if (tweet.user.lang == LANG && !tweet.user.name.toLowerCase().includes('mmr') &&
-        !tweet.user.screen_name.toLowerCase().includes('mmr') &&
-        !tweet.retweeted_status) favTwitelo(twitelo, tweet);
+        !tweet.user.screen_name.toLowerCase().includes('mmr') && !tweet.user.name.toLowerCase().includes('wr') &&
+        !tweet.user.screen_name.toLowerCase().includes('wr') && !tweet.retweeted_status) favTwitelo(twitelo, tweet);
 });
 
 rtstream.on('tweet', function (tweet) {
