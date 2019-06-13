@@ -41,7 +41,7 @@ let rtstream = proverbe.stream('statuses/filter', {
     track: ['#proverbe', '#citation']
 });
 
-// FAVLIMIT/40 secondes
+// FAVLIMIT/2 minutes
 const FAVLIMIT = 1;
 // FAVLIMIT/10 minutes
 const FAVLIMITTWITELO = 1;
@@ -108,7 +108,7 @@ let favTwitelo = (account, tweet) => {
 setInterval(() => {
     console.log(`(iFonny_) Nombre de tweets fav durant les 40 dernieres secondes : ${favlimit}`)
     favlimit = 0;
-}, 40000);
+}, 120000);
 
 setInterval(() => {
     console.log(`(TwiteloFR) Nombre de tweets fav durant les 10 dernieres minutes : ${favlimitTwitelo}`)
