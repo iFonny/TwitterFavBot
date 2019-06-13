@@ -106,7 +106,7 @@ let favTwitelo = (account, tweet) => {
 /* Loop reset limits */
 
 setInterval(() => {
-    console.log(`(iFonny_) Nombre de tweets fav durant les 40 dernieres secondes : ${favlimit}`)
+    console.log(`(iFonny_) Nombre de tweets fav durant les 2 dernieres minutes : ${favlimit}`)
     favlimit = 0;
 }, 120000);
 
