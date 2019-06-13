@@ -48,7 +48,7 @@ const FAVLIMITTWITELO = 1;
 // RTLIMIT/2 minutes
 const RTLIMIT = 1;
 
-const LANG = 'fr';
+const LANG = null;
 
 let favlimit = 0;
 let favlimitTwitelo = 0;
