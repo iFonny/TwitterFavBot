@@ -22,8 +22,16 @@ const twitelo = new Twitter({
     access_token_secret: config.twitelo.access_token_secret
 });
 
+const bannedWords = ['weed', 'beuh', 'covid', 'shit', 'vaccin', 'faux bilet', 'THC', 'Télégram', 'Telegram', 'WhatsApp', 'drogue', 'cocaine', '#mrproverbe', 'Pass Sanitaire', 'vacinal'];
+const bannedWordsRegex  = new RegExp(bannedWords.join('|').toLowerCase(), 'g');
+
+function hasBannedWords(text) {
+    return text.toLowerCase().match(bannedWordsRegex) != null;
+}
+
 let favstream = main.stream('statuses/filter', {
-    track: ['ori and the blind forest', 'ori and the will of the wisps', 'sense8']
+    track: ['ori and the blind forest', 'ori and the will of the wisps', 'sense8'],
+    language: 'en,fr',
 });
 
 let favstreamTwitelo = twitelo.stream('statuses/filter', {
@@ -34,11 +42,13 @@ let favstreamTwitelo = twitelo.stream('statuses/filter', {
         'Mordekaiser', 'Nasus', 'Nidalee', 'Rammus', 'RekSai', 'Renekton', 'Riven', 'Sejuani', 'Singed',
         'Skarner', 'Syndra', 'Taric', 'Teemo', 'Thresh', 'Tryndamere', 'Twisted Fate', 'Udyr', 'Urgot', 'Varus', 'Vayne',
         'Veigar', 'VelKoz', 'Volibear', 'Wukong', 'Xerath', 'Yasuo', 'Ziggs', 'Zilean'
-    ]
+    ],
+    language: 'en,fr',
 });
 
 let rtstream = proverbe.stream('statuses/filter', {
-    track: ['#proverbe', '#citation']
+    track: ['#proverbe', '#citation'],
+    language: 'en,fr',
 });
 
 // FAVLIMIT/2 minutes
@@ -48,7 +58,7 @@ const FAVLIMITTWITELO = 1;
 // RTLIMIT/2 minutes
 const RTLIMIT = 1;
 
-const LANG = null;
+const ENABLED = false;
 
 let favlimit = 0;
 let favlimitTwitelo = 0;
@@ -57,23 +67,23 @@ let rtlimit = 0;
 
 // Streams on tweet
 favstream.on('tweet', function (tweet) {
-    if (tweet.user.lang == LANG && !tweet.retweeted_status) fav(main, tweet);
+    if (!hasBannedWords(tweet.text) && !tweet.retweeted_status) fav(main, tweet);
 });
 
 favstreamTwitelo.on('tweet', function (tweet) {
-    if (tweet.user.lang == LANG && !tweet.user.name.toLowerCase().includes('mmr') &&
+    if (!hasBannedWords(tweet.text) && !tweet.user.name.toLowerCase().includes('mmr') &&
         !tweet.user.screen_name.toLowerCase().includes('mmr') && !tweet.user.name.toLowerCase().includes('wr') &&
         !tweet.user.screen_name.toLowerCase().includes('wr') && !tweet.retweeted_status) favTwitelo(twitelo, tweet);
 });
 
 rtstream.on('tweet', function (tweet) {
-    if (tweet.user.lang == LANG && !tweet.retweeted_status) retweet(proverbe, tweet);
+    if (!hasBannedWords(tweet.text) && !tweet.retweeted_status) retweet(proverbe, tweet);
 });
 
 /* Actions fonctions */
 
 let retweet = (account, tweet) => {
-    if (rtlimit < RTLIMIT) {
+    if (ENABLED && rtlimit < RTLIMIT) {
         rtlimit++;
         account.post('statuses/retweet/:id', {
             id: tweet.id_str
@@ -82,7 +92,7 @@ let retweet = (account, tweet) => {
 };
 
 let fav = (account, tweet) => {
-    if (favlimit < FAVLIMIT) {
+    if (ENABLED && favlimit < FAVLIMIT) {
         favlimit++;
         setTimeout(() => {
             account.post('favorites/create', {
@@ -93,7 +103,7 @@ let fav = (account, tweet) => {
 };
 
 let favTwitelo = (account, tweet) => {
-    if (favlimitTwitelo < FAVLIMITTWITELO) {
+    if (ENABLED && favlimitTwitelo < FAVLIMITTWITELO) {
         favlimitTwitelo++;
         setTimeout(() => {
             account.post('favorites/create', {
