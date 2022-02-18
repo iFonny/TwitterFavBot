@@ -24,7 +24,7 @@ const twitelo = new Twitter({
 
 const bannedWords = ['weed', 'beuh', 'covid', 'shit', 'vaccin', 'faux bilet', 'THC', 'Télégram', 'Telegram', 'WhatsApp', 'drogue', 
                     'cocaine', '#mrproverbe', 'Pass sanitaire', 'vacinal', 'tabac', 'hash', 'passeport', "carte d\\'identité", 
-                    'permis de conduire', 'snapchat', 'follow'];
+                    'permis de conduire', 'snapchat', 'follow', 'abonner'];
 const bannedWordsRegex  = new RegExp(bannedWords.join('|').toLowerCase(), 'gmi');
 console.log('Banword regex: ', bannedWordsRegex)
 
