@@ -58,7 +58,7 @@ const FAVLIMITTWITELO = 1;
 // RTLIMIT/2 minutes
 const RTLIMIT = 1;
 
-const ENABLED = false;
+const ENABLED = true;
 
 let favlimit = 0;
 let favlimitTwitelo = 0;
