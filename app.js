@@ -22,8 +22,11 @@ const twitelo = new Twitter({
     access_token_secret: config.twitelo.access_token_secret
 });
 
-const bannedWords = ['weed', 'beuh', 'covid', 'shit', 'vaccin', 'faux bilet', 'THC', 'Télégram', 'Telegram', 'WhatsApp', 'drogue', 'cocaine', '#mrproverbe', 'Pass Sanitaire', 'vacinal'];
-const bannedWordsRegex  = new RegExp(bannedWords.join('|').toLowerCase(), 'g');
+const bannedWords = ['weed', 'beuh', 'covid', 'shit', 'vaccin', 'faux bilet', 'THC', 'Télégram', 'Telegram', 'WhatsApp', 'drogue', 
+                    'cocaine', '#mrproverbe', 'Pass sanitaire', 'vacinal', 'tabac', 'hash', 'passeport', "carte d\\'identité", 
+                    'permis de conduire', 'snapchat', 'follow'];
+const bannedWordsRegex  = new RegExp(bannedWords.join('|').toLowerCase(), 'gmi');
+console.log('Banword regex: ', bannedWordsRegex)
 
 function hasBannedWords(text) {
     return text.toLowerCase().match(bannedWordsRegex) != null;
@@ -67,17 +70,17 @@ let rtlimit = 0;
 
 // Streams on tweet
 favstream.on('tweet', function (tweet) {
-    if (!hasBannedWords(tweet.text) && !tweet.retweeted_status) fav(main, tweet);
+    if (!tweet.retweeted_status && !hasBannedWords(tweet.extended_tweet?.full_text || tweet.text)) fav(main, tweet);
 });
 
 favstreamTwitelo.on('tweet', function (tweet) {
-    if (!hasBannedWords(tweet.text) && !tweet.user.name.toLowerCase().includes('mmr') &&
+    if (!tweet.retweeted_status && !hasBannedWords(tweet.extended_tweet?.full_text || tweet.text) && !tweet.user.name.toLowerCase().includes('mmr') &&
         !tweet.user.screen_name.toLowerCase().includes('mmr') && !tweet.user.name.toLowerCase().includes('wr') &&
-        !tweet.user.screen_name.toLowerCase().includes('wr') && !tweet.retweeted_status) favTwitelo(twitelo, tweet);
+        !tweet.user.screen_name.toLowerCase().includes('wr')) favTwitelo(twitelo, tweet);
 });
 
 rtstream.on('tweet', function (tweet) {
-    if (!hasBannedWords(tweet.text) && !tweet.retweeted_status) retweet(proverbe, tweet);
+    if (!tweet.retweeted_status && !hasBannedWords(tweet.extended_tweet?.full_text || tweet.text)) retweet(proverbe, tweet);
 });
 
 /* Actions fonctions */

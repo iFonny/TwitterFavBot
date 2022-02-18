@@ -34,5 +34,8 @@
   "homepage": "https://github.com/iFonny/TwitterFavBot#readme",
   "dependencies": {
     "twit": "^2.2.9"
+  },
+  "volta": {
+    "node": "16.14.0"
   }
 }
